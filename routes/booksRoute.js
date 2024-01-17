@@ -1,4 +1,4 @@
-import Author from "../models/authors.js";
+import Book from "../models/books.js";
 import express, { Router } from "express";
 
 //Router Setup
@@ -8,9 +8,9 @@ router.use(express.json());
 //Create a resource
 router.post('/', async (req, res) => {
     try {
-        const author = new Author(req.body);
-        await author.save();
-        res.send(author);
+        const book = new Book(req.body);
+        await book.save();
+        res.send(book);
     }catch(err) {
         res.status(400).send(err.message);
     }
@@ -19,8 +19,8 @@ router.post('/', async (req, res) => {
 //Read resource list
 router.get('/', async (req, res) => {
     try {
-        const authors = await Author.find();
-        res.send(authors);
+        const books = await Book.find();
+        res.send(books);
     }catch(err) {
         res.status(500).send(err.message);
     }
@@ -29,8 +29,8 @@ router.get('/', async (req, res) => {
 //Read single resource
 router.get('/:id', async (req, res) => {
     try {
-        const author = await Author.findById(req.params.id);
-        res.send(author);
+        const book = await Book.findById(req.params.id);
+        res.send(book);
     }catch(err) {
         res.status(404).send(err.message);
     }
@@ -39,10 +39,10 @@ router.get('/:id', async (req, res) => {
 //Update resource
 router.put('/:id', async (req, res) => {
     try {
-        const author = await Author.findById(req.params.id);
-        author.set(req.body);
-        await author.save();
-        res.send(author);
+        const book = await Book.findById(req.params.id);
+        book.set(req.body);
+        await book.save();
+        res.send(book);
     }catch(err) {
         res.status(404).send(err.message);
     }
@@ -51,8 +51,8 @@ router.put('/:id', async (req, res) => {
 //Delete resource
 router.delete('/:id', async (req, res) => {
     try {
-        await Author.findByIdAndDelete(req.params.id);
-        res.send(`Author with ID ${req.params.id} deleted successfully.`);
+        await Book.findByIdAndDelete(req.params.id);
+        res.send(`Book with ID ${req.params.id} deleted successfully.`);
     }catch(err) {
         res.status(404).send(err.message);
     }

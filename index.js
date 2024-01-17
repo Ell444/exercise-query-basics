@@ -1,4 +1,5 @@
 import authorsRouter from "./routes/authorsRoute.js";
+import booksRouter from "./routes/booksRoute.js"
 import cors from "cors";
 import dotenv from "dotenv"; dotenv.config();
 import express from "express";
@@ -15,6 +16,7 @@ app.use(cors({origin: '*'}));
 
 //Routes
 app.use('/authors', authorsRouter);
+app.use('/books', booksRouter);
 
 //Database & server run
 mongoose.connect(MONGO_URI)
